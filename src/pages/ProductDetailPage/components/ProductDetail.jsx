@@ -17,7 +17,7 @@ function ProductDetail({ title, rating, commentNum, price, img, onAdd }) {
       <FlexBox>{img}</FlexBox>
       <FlexBox>
         {title}
-        <RatingComponent />
+        <RatingComponent rating={rating} commentNum={commentNum}/>
         <FlexBox>$ {price}</FlexBox>
         <Form.Item label="Qty:">
           <Select defaultValue={selectOpts[0].value} options={selectOpts} />
