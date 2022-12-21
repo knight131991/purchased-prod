@@ -1,7 +1,8 @@
 import React, { useMemo } from "react";
 import PropTypes from "prop-types";
-import FlexBox from "../../components/FlexBox";
-import { Button, Form, Rate, Select } from "antd";
+import FlexBox from "../../../components/FlexBox";
+import { Button, Form, Select } from "antd";
+import RatingComponent from "./RatingComponent";
 
 function ProductDetail({ title, rating, commentNum, price, img, onAdd }) {
   const selectOpts = useMemo(
@@ -16,10 +17,7 @@ function ProductDetail({ title, rating, commentNum, price, img, onAdd }) {
       <FlexBox>{img}</FlexBox>
       <FlexBox>
         {title}
-        <FlexBox row>
-          <Rate disabled value={rating} />
-          {`(${commentNum})`}
-        </FlexBox>
+        <RatingComponent />
         <FlexBox>$ {price}</FlexBox>
         <Form.Item label="Qty:">
           <Select defaultValue={selectOpts[0].value} options={selectOpts} />

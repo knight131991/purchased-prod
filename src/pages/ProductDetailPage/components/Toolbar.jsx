@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import FlexBox from "../../components/FlexBox";
+import FlexBox from "../../../components/FlexBox";
 import styled from "styled-components";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { Button, Empty, Popover } from "antd";

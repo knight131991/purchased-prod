@@ -1,14 +1,14 @@
 import React from "react";
-import PropTypes from "prop-types";
 import FlexBox from "../../components/FlexBox";
-import Toolbar from "./Toolbar";
-import ReviewsBlock from "./ReviewsBlock";
+import Toolbar from "./components/Toolbar";
+import ReviewsBlock from "./components/ReviewsBlock";
+import ProductDetail from "./components/ProductDetail";
 
-function ProductDetailPage(props) {
+function ProductDetailPage() {
   return (
     <FlexBox>
       <Toolbar />
-      <ProductDetailPage />
+      <ProductDetail />
       <ReviewsBlock />
     </FlexBox>
   );
