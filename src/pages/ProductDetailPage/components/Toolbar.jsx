@@ -51,7 +51,7 @@ Toolbar.defaultProps = {
 
 Toolbar.propTypes = {
   selectedProds: PropTypes.arrayOf(
-    PropTypes.objectOf({
+    PropTypes.shape({
       id: PropTypes.number,
       img: PropTypes.node,
       name: PropTypes.string,
