@@ -1,12 +1,51 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useMemo } from "react";
+import PropTypes from "prop-types";
+import FlexBox from "../../components/FlexBox";
+import { Button, Form, Rate, Select } from "antd";
 
-function ProductDetail(props) {
+function ProductDetail({ title, rating, commentNum, price, img, onAdd }) {
+  const selectOpts = useMemo(
+    () =>
+      Array(5)
+        .fill(0)
+        .map((item, id) => ({ value: id + 1, label: id + 1 })),
+    []
+  );
   return (
-    <div>ProductDetail</div>
-  )
+    <FlexBox row>
+      <FlexBox>{img}</FlexBox>
+      <FlexBox>
+        {title}
+        <FlexBox row>
+          <Rate disabled value={rating} />
+          {`(${commentNum})`}
+        </FlexBox>
+        <FlexBox>$ {price}</FlexBox>
+        <Form.Item label="Qty:">
+          <Select defaultValue={selectOpts[0].value} options={selectOpts} />
+        </Form.Item>
+        <Button>Add to cart</Button>
+      </FlexBox>
+    </FlexBox>
+  );
 }
 
-ProductDetail.propTypes = {}
+ProductDetail.defaultProps = {
+  img: undefined,
+  price: undefined,
+  rating: undefined,
+  commentNum: 0,
+  title: "",
+  onAdd: () => {},
+};
 
-export default ProductDetail
+ProductDetail.propTypes = {
+  img: PropTypes.node,
+  price: PropTypes.number,
+  rating: PropTypes.number,
+  commentNum: PropTypes.number,
+  title: PropTypes.string,
+  onAdd: PropTypes.func,
+};
+
+export default ProductDetail;
