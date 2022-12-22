@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import FlexBox from "../../components/FlexBox";
 import Toolbar from "./components/Toolbar";
 import ReviewsBlock from "./components/ReviewsBlock";
@@ -14,13 +14,28 @@ const Container = styled(FlexBox)`
 `;
 
 function ProductDetailPage() {
+  const [selectedProds, setSelectedProds] = useState([]);
+  const [idx, setIdx] = useState(0);
+
   const { screen } = useRWD();
   const isMobileMode = useMemo(() => screen <= screenEnum.sm, [screen]);
   const { comments, prodName, price, totalComment, avgRating } = mockData;
 
+  const handleAdd = useCallback(
+    (img, qty) => {
+      setIdx(idx + 1);
+      setSelectedProds([...selectedProds, { id: idx, img, qty }]);
+    },
+    [selectedProds, idx]
+  );
+
+  const handleRemove = useCallback((id) => {
+    setSelectedProds(selectedProds.filter((item) => item.id !== id));
+  }, [selectedProds]);
+
   return (
     <FlexBox>
-      <Toolbar />
+      <Toolbar selectedProds={selectedProds} onRemove={handleRemove} />
       <Container>
         <ProductDetail
           img={switchMain}
@@ -29,6 +44,7 @@ function ProductDetailPage() {
           rating={avgRating}
           price={price}
           title={prodName}
+          onAdd={handleAdd}
         />
         <ReviewsBlock
           isMobileMode={isMobileMode}

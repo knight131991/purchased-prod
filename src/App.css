@@ -6,3 +6,8 @@
     max-height: 80vh;
     overflow: auto;
 }
+
+.toolbar__popover {
+    max-height: 80vh;
+    overflow: auto;
+}

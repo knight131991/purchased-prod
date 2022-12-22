@@ -11,13 +11,17 @@ const Container = styled(FlexBox)`
 `;
 
 const IconContainer = styled.span`
-  margin-right: 12px;
+  margin-right: 16px;
   font-size: 28px;
   cursor: pointer;
 `;
 
 const Icon = styled(ShoppingCartOutlined)`
   font-size: 24px;
+`;
+
+const CartItemContainer = styled(FlexBox)`
+  margin-bottom: 18px;
 `;
 
 const PopoverContent = ({ selectedProds, onRemove }) =>
@@ -27,13 +31,13 @@ const PopoverContent = ({ selectedProds, onRemove }) =>
         onRemove(item?.id);
       };
       return (
-        <FlexBox key={item?.id}>
-          <FlexBox row>
-            {item?.img}
-            {item?.name}
+        <CartItemContainer key={item?.id}>
+          <FlexBox row align="center">
+            <img width={70} src={item?.img || ""} alt="thumbnail" />
+            Qty : {item?.qty}
           </FlexBox>
           <Button onClick={handleRemove}>Remove from cart</Button>
-        </FlexBox>
+        </CartItemContainer>
       );
     })
   ) : (
@@ -45,6 +49,7 @@ function Toolbar({ selectedProds, onRemove }) {
       <Popover
         trigger="click"
         placement="bottomRight"
+        overlayClassName="toolbar__popover"
         content={
           <PopoverContent selectedProds={selectedProds} onRemove={onRemove} />
         }
@@ -69,7 +74,7 @@ Toolbar.propTypes = {
     PropTypes.shape({
       id: PropTypes.number,
       img: PropTypes.node,
-      name: PropTypes.string,
+      qty: PropTypes.number,
     })
   ),
 

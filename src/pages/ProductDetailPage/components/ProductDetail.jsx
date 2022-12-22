@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import FlexBox from "../../../components/FlexBox";
 import { Button, Form, Select } from "antd";
@@ -22,7 +22,8 @@ const AddBtn = styled(Button)`
 `;
 
 const QtySelector = styled(Select)`
-  max-width: 100px;
+  max-width: 120px;
+  min-width: 96px;
 `;
 
 const PriceContainer = styled(FlexBox)`
@@ -46,6 +47,9 @@ function ProductDetail({
         .map((item, id) => ({ value: id + 1, label: id + 1 })),
     []
   );
+
+  const [qty, setQty] = useState(selectOpts[0]?.value || 1);
+
   return (
     <Container row wrap>
       <ImgContainer isMobileMode={isMobileMode}>
@@ -55,13 +59,13 @@ function ProductDetail({
         <h2>{title}</h2>
         <RatingComponent rating={rating} commentNum={commentNum} />
         <PriceContainer>$ {price}</PriceContainer>
-        <Form.Item label="Qty:">
-          <QtySelector
-            defaultValue={selectOpts[0].value}
-            options={selectOpts}
-          />
-        </Form.Item>
-        <AddBtn isMobileMode={isMobileMode}>Add to cart</AddBtn>
+        <span>
+          {"Qty : "}
+          <QtySelector onChange={setQty} value={qty} options={selectOpts} />
+        </span>
+        <AddBtn onClick={() => onAdd(img, qty)} isMobileMode={isMobileMode}>
+          Add to cart
+        </AddBtn>
       </InfoContainer>
     </Container>
   );

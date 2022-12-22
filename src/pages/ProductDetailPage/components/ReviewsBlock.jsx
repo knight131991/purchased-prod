@@ -12,6 +12,7 @@ const Container = styled(FlexBox)`
 
 const TitleBlock = styled.span`
   padding: 24px;
+  ${(props) => props.isMobileMode && "padding-left:0;"}
 
   & > span {
     font-weight: bold;
@@ -79,7 +80,7 @@ function ReviewsBlock({ comments, commentNum, rating, isMobileMode }) {
 
   return (
     <Container gap={12}>
-      <TitleBlock>
+      <TitleBlock isMobileMode={isMobileMode}>
         <span>Reviews</span>
         <RatingComponent commentNum={commentNum} rating={rating} />
       </TitleBlock>
