@@ -8,16 +8,20 @@ import styled from "styled-components";
 const Container = styled(FlexBox)`
   padding: 12px 0;
 `;
-const ImgContainer = styled(FlexBox)`
+const ImgContainer = styled(({ isMobileMode, ...rest }) => (
+  <FlexBox {...rest} />
+))`
   width: ${(props) => (props.isMobileMode ? "100%" : "40%")};
 `;
 
-const InfoContainer = styled(FlexBox)`
+const InfoContainer = styled(({ isMobileMode, ...rest }) => (
+  <FlexBox {...rest} />
+))`
   width: ${(props) => (props.isMobileMode ? "100%" : "calc(60% - 24px)")};
   padding-left: ${(props) => (props.isMobileMode ? "0" : "24px")};
 `;
 
-const AddBtn = styled(Button)`
+const AddBtn = styled(({ isMobileMode, ...rest }) => <Button {...rest} />)`
   ${(props) => !props.isMobileMode && "max-width: 300px;"}
 `;
 

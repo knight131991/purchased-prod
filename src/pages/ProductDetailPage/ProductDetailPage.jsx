@@ -27,7 +27,7 @@ function ProductDetailPage() {
         curProd.qty += qty;
         setSelectedProds([...selectedProds]);
       } else {
-        setSelectedProds([...selectedProds, { img, qty, name }]);
+        setSelectedProds([...selectedProds, { img, qty, name, id: 0 }]);
       }
     },
     [selectedProds]
