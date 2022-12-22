@@ -109,7 +109,7 @@ ReviewsBlock.propTypes = {
   comments: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      date: PropTypes.object,
+      date: PropTypes.number,
       rating: PropTypes.number,
       author: PropTypes.string,
       descript: PropTypes.string,
