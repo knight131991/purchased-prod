@@ -6,10 +6,12 @@ import ProductDetail from "./components/ProductDetail";
 import useRWD from "../../hooks/useRWD";
 import screenEnum from "../../constant/screenEnum";
 import switchMain from "../../imgs/switch_main.webp";
+import mockData from "../../constant/mockData.js";
 
 function ProductDetailPage() {
   const { screen } = useRWD();
   const isMobileMode = useMemo(() => screen <= screenEnum.sm, [screen]);
+  const { comments, prodName, price, totalComment, avgRating } = mockData;
 
   return (
     <FlexBox>
@@ -17,12 +19,12 @@ function ProductDetailPage() {
       <ProductDetail
         img={switchMain}
         isMobileMode={isMobileMode}
-        commentNum={123}
-        rating={4}
-        price={300}
-        title="Nitendo Switch w/Neon Blue & Neon Red Joy-Con + 12 Month individual Membership Nintendo Switch Online + Carrying Case"
+        commentNum={totalComment}
+        rating={avgRating}
+        price={price}
+        title={prodName}
       />
-      <ReviewsBlock isMobileMode={isMobileMode} />
+      <ReviewsBlock isMobileMode={isMobileMode} comments={comments} rating={avgRating} commentNum={totalComment}/>
     </FlexBox>
   );
 }

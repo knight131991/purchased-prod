@@ -12,10 +12,7 @@ const renderItem = (item) => {
         <FlexBox>
           <FlexBox row>
             {item?.author}
-            <RatingComponent
-              rating={item?.rating}
-              showCommentNum={false}
-            />
+            <RatingComponent rating={item?.rating} showCommentNum={false} />
           </FlexBox>
           {item?.descript}
           {item?.imgs}
@@ -83,26 +80,7 @@ function ReviewsBlock({ comments, commentNum, rating, isMobileMode }) {
 }
 
 ReviewsBlock.defaultProps = {
-  comments: [
-    {
-      date: 2132135156,
-      rating: 3,
-      author: "tzu.chieh.lin",
-      descript: " PropTypes.string",
-    },
-    {
-      date: 2132135156,
-      rating: 3,
-      author: "tzu.chieh.lin",
-      descript: " PropTypes.string",
-    },
-    {
-      date: 2132135156,
-      rating: 3,
-      author: "tzu.chieh.lin",
-      descript: " PropTypes.string",
-    },
-  ],
+  comments: [],
 };
 ReviewsBlock.propTypes = {
   comments: PropTypes.arrayOf(
