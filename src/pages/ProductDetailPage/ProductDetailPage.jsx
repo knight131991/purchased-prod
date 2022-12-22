@@ -15,23 +15,30 @@ const Container = styled(FlexBox)`
 
 function ProductDetailPage() {
   const [selectedProds, setSelectedProds] = useState([]);
-  const [idx, setIdx] = useState(0);
 
   const { screen } = useRWD();
   const isMobileMode = useMemo(() => screen <= screenEnum.sm, [screen]);
   const { comments, prodName, price, totalComment, avgRating } = mockData;
 
   const handleAdd = useCallback(
-    (img, qty) => {
-      setIdx(idx + 1);
-      setSelectedProds([...selectedProds, { id: idx, img, qty }]);
+    (img, qty, name) => {
+      const curProd = selectedProds.find((item) => item.name === name);
+      if (curProd) {
+        curProd.qty += qty;
+        setSelectedProds([...selectedProds]);
+      } else {
+        setSelectedProds([...selectedProds, { img, qty, name }]);
+      }
     },
-    [selectedProds, idx]
+    [selectedProds]
   );
 
-  const handleRemove = useCallback((id) => {
-    setSelectedProds(selectedProds.filter((item) => item.id !== id));
-  }, [selectedProds]);
+  const handleRemove = useCallback(
+    (id) => {
+      setSelectedProds(selectedProds.filter((item) => item.id !== id));
+    },
+    [selectedProds]
+  );
 
   return (
     <FlexBox>

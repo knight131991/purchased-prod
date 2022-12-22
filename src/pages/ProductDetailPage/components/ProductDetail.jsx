@@ -63,7 +63,10 @@ function ProductDetail({
           {"Qty : "}
           <QtySelector onChange={setQty} value={qty} options={selectOpts} />
         </span>
-        <AddBtn onClick={() => onAdd(img, qty)} isMobileMode={isMobileMode}>
+        <AddBtn
+          onClick={() => onAdd(img, qty, title)}
+          isMobileMode={isMobileMode}
+        >
           Add to cart
         </AddBtn>
       </InfoContainer>
