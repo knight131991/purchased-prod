@@ -7,6 +7,11 @@ import useRWD from "../../hooks/useRWD";
 import screenEnum from "../../constant/screenEnum";
 import switchMain from "../../imgs/switch_main.webp";
 import mockData from "../../constant/mockData.js";
+import styled from "styled-components";
+
+const Container = styled(FlexBox)`
+  padding: 0 16px;
+`;
 
 function ProductDetailPage() {
   const { screen } = useRWD();
@@ -16,15 +21,22 @@ function ProductDetailPage() {
   return (
     <FlexBox>
       <Toolbar />
-      <ProductDetail
-        img={switchMain}
-        isMobileMode={isMobileMode}
-        commentNum={totalComment}
-        rating={avgRating}
-        price={price}
-        title={prodName}
-      />
-      <ReviewsBlock isMobileMode={isMobileMode} comments={comments} rating={avgRating} commentNum={totalComment}/>
+      <Container>
+        <ProductDetail
+          img={switchMain}
+          isMobileMode={isMobileMode}
+          commentNum={totalComment}
+          rating={avgRating}
+          price={price}
+          title={prodName}
+        />
+        <ReviewsBlock
+          isMobileMode={isMobileMode}
+          comments={comments}
+          rating={avgRating}
+          commentNum={totalComment}
+        />
+      </Container>
     </FlexBox>
   );
 }

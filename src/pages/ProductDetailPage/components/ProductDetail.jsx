@@ -6,7 +6,7 @@ import RatingComponent from "./RatingComponent";
 import styled from "styled-components";
 
 const Container = styled(FlexBox)`
-  padding: 12px 16px;
+  padding: 12px 0;
 `;
 const ImgContainer = styled(FlexBox)`
   width: ${(props) => (props.isMobileMode ? "100%" : "40%")};

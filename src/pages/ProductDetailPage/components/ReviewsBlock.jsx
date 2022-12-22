@@ -4,14 +4,36 @@ import FlexBox from "../../../components/FlexBox";
 import RatingComponent from "./RatingComponent";
 import moment from "moment";
 import { Button, List, notification } from "antd";
+import styled from "styled-components";
+
+const Container = styled(FlexBox)`
+  padding: 0 16px 24px;
+`;
+
+const TitleBlock = styled.span`
+  padding: 24px;
+
+  & > span {
+    font-weight: bold;
+    font-size: 18px;
+  }
+`;
+
+const AuthorStr = styled.span`
+  font-size: 16px;
+`;
+
+const ReviewTitle = styled.span`
+  font-size: 28px;
+`;
 
 const renderItem = (item) => {
   return (
     <List.Item key={item?.id}>
       <FlexBox row justify="space-between" flex>
-        <FlexBox>
-          <FlexBox row>
-            {item?.author}
+        <FlexBox gap={8}>
+          <FlexBox row align="end" gap={12}>
+            <AuthorStr>{item?.author}</AuthorStr>
             <RatingComponent rating={item?.rating} showCommentNum={false} />
           </FlexBox>
           {item?.descript}
@@ -35,7 +57,7 @@ function ReviewsBlock({ comments, commentNum, rating, isMobileMode }) {
   const [showNotify, setShowNotify] = useState(false);
   const openNotification = useCallback(() => {
     notification.open({
-      message: "Reviews",
+      message: <ReviewTitle>Reviews</ReviewTitle>,
       description: rendercommentList(comments),
       placement: "bottom",
       duration: 0,
@@ -56,26 +78,26 @@ function ReviewsBlock({ comments, commentNum, rating, isMobileMode }) {
   }, [isMobileMode]);
 
   return (
-    <>
-      <FlexBox>
-        Reviews
+    <Container gap={12}>
+      <TitleBlock>
+        <span>Reviews</span>
         <RatingComponent commentNum={commentNum} rating={rating} />
-        {isMobileMode ? (
-          <Button
-            type="text"
-            disabled={showNotify}
-            onClick={() => {
-              setShowNotify(true);
-              openNotification();
-            }}
-          >
-            See more reviews
-          </Button>
-        ) : (
-          rendercommentList(comments)
-        )}
-      </FlexBox>
-    </>
+      </TitleBlock>
+      {isMobileMode ? (
+        <Button
+          type="text"
+          disabled={showNotify}
+          onClick={() => {
+            setShowNotify(true);
+            openNotification();
+          }}
+        >
+          See more reviews
+        </Button>
+      ) : (
+        rendercommentList(comments)
+      )}
+    </Container>
   );
 }
 
