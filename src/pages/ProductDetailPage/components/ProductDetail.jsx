@@ -3,8 +3,42 @@ import PropTypes from "prop-types";
 import FlexBox from "../../../components/FlexBox";
 import { Button, Form, Select } from "antd";
 import RatingComponent from "./RatingComponent";
+import styled from "styled-components";
 
-function ProductDetail({ title, rating, commentNum, price, img, onAdd }) {
+const Container = styled(FlexBox)`
+  padding: 12px 16px;
+`;
+const ImgContainer = styled(FlexBox)`
+  width: ${(props) => (props.isMobileMode ? "100%" : "40%")};
+`;
+
+const InfoContainer = styled(FlexBox)`
+  width: ${(props) => (props.isMobileMode ? "100%" : "calc(60% - 24px)")};
+  padding-left: ${(props) => (props.isMobileMode ? "0" : "24px")};
+`;
+
+const AddBtn = styled(Button)`
+  ${(props) => !props.isMobileMode && "max-width: 300px;"}
+`;
+
+const QtySelector = styled(Select)`
+  max-width: 100px;
+`;
+
+const PriceContainer = styled(FlexBox)`
+  font-weight: bold;
+  font-size: 24px;
+`;
+
+function ProductDetail({
+  title,
+  rating,
+  commentNum,
+  price,
+  img,
+  onAdd,
+  isMobileMode,
+}) {
   const selectOpts = useMemo(
     () =>
       Array(5)
@@ -13,18 +47,23 @@ function ProductDetail({ title, rating, commentNum, price, img, onAdd }) {
     []
   );
   return (
-    <FlexBox row>
-      <FlexBox>{img}</FlexBox>
-      <FlexBox>
-        {title}
-        <RatingComponent rating={rating} commentNum={commentNum}/>
-        <FlexBox>$ {price}</FlexBox>
+    <Container row wrap>
+      <ImgContainer isMobileMode={isMobileMode}>
+        <img src={img} alt="thumbnail" />
+      </ImgContainer>
+      <InfoContainer gap="20px" isMobileMode={isMobileMode}>
+        <h2>{title}</h2>
+        <RatingComponent rating={rating} commentNum={commentNum} />
+        <PriceContainer>$ {price}</PriceContainer>
         <Form.Item label="Qty:">
-          <Select defaultValue={selectOpts[0].value} options={selectOpts} />
+          <QtySelector
+            defaultValue={selectOpts[0].value}
+            options={selectOpts}
+          />
         </Form.Item>
-        <Button>Add to cart</Button>
-      </FlexBox>
-    </FlexBox>
+        <AddBtn isMobileMode={isMobileMode}>Add to cart</AddBtn>
+      </InfoContainer>
+    </Container>
   );
 }
 
@@ -35,6 +74,7 @@ ProductDetail.defaultProps = {
   commentNum: 0,
   title: "",
   onAdd: () => {},
+  isMobileMode: false,
 };
 
 ProductDetail.propTypes = {
@@ -44,6 +84,7 @@ ProductDetail.propTypes = {
   commentNum: PropTypes.number,
   title: PropTypes.string,
   onAdd: PropTypes.func,
+  isMobileMode: PropTypes.bool,
 };
 
 export default ProductDetail;

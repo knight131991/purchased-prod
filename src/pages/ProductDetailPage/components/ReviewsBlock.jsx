@@ -5,7 +5,7 @@ import RatingComponent from "./RatingComponent";
 import moment from "moment";
 import { Button, List, notification } from "antd";
 
-const renderItem = (item, showCommentNum) => {
+const renderItem = (item) => {
   return (
     <List.Item key={item?.id}>
       <FlexBox row justify="space-between" flex>
@@ -14,7 +14,7 @@ const renderItem = (item, showCommentNum) => {
             {item?.author}
             <RatingComponent
               rating={item?.rating}
-              showCommentNum={showCommentNum}
+              showCommentNum={false}
             />
           </FlexBox>
           {item?.descript}
@@ -26,11 +26,11 @@ const renderItem = (item, showCommentNum) => {
   );
 };
 
-const rendercommentList = (comments, showCommentNum) => (
+const rendercommentList = (comments) => (
   <List
     itemLayout="horizontal"
     dataSource={comments}
-    renderItem={(item) => renderItem(item, showCommentNum)}
+    renderItem={(item) => renderItem(item)}
   />
 );
 
@@ -39,7 +39,7 @@ function ReviewsBlock({ comments, commentNum, rating, isMobileMode }) {
   const openNotification = useCallback(() => {
     notification.open({
       message: "Reviews",
-      description: rendercommentList(comments, false),
+      description: rendercommentList(comments),
       placement: "bottom",
       duration: 0,
       onClose: () => setShowNotify(false),
@@ -75,7 +75,7 @@ function ReviewsBlock({ comments, commentNum, rating, isMobileMode }) {
             See more reviews
           </Button>
         ) : (
-          rendercommentList(comments, true)
+          rendercommentList(comments)
         )}
       </FlexBox>
     </>

@@ -5,7 +5,7 @@ import { Rate } from "antd";
 
 function RatingComponent({ rating, commentNum, showCommentNum }) {
   return (
-    <FlexBox row>
+    <FlexBox row align='center' gap='15px'>
       <Rate disabled value={rating} />
       {showCommentNum && `(${commentNum})`}
     </FlexBox>
