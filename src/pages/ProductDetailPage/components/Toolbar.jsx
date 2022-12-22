@@ -3,10 +3,21 @@ import PropTypes from "prop-types";
 import FlexBox from "../../../components/FlexBox";
 import styled from "styled-components";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import { Button, Empty, Popover } from "antd";
+import { Badge, Button, Empty, Popover } from "antd";
 
 const Container = styled(FlexBox)`
-  border: 1px gray solid;
+  border-bottom: 1px gray solid;
+  min-height: 40px;
+`;
+
+const IconContainer = styled.span`
+  margin-right: 12px;
+  font-size: 28px;
+  cursor: pointer;
+`;
+
+const Icon = styled(ShoppingCartOutlined)`
+  font-size: 24px;
 `;
 
 const PopoverContent = ({ selectedProds, onRemove }) =>
@@ -38,7 +49,11 @@ function Toolbar({ selectedProds, onRemove }) {
           <PopoverContent selectedProds={selectedProds} onRemove={onRemove} />
         }
       >
-        <ShoppingCartOutlined />
+        <IconContainer>
+          <Badge size="small" count={selectedProds.length}>
+            <Icon />
+          </Badge>
+        </IconContainer>
       </Popover>
     </Container>
   );
